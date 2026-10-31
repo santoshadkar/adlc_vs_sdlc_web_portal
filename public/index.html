@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AiDLC vs SDLC | Enterprise Architecture, Security & Decision Matrix Portal</title>
+  <meta name="description" content="Comprehensive enterprise knowledge portal comparing Artificial Intelligence Development Life Cycle (AiDLC) versus Software Development Life Cycle (SDLC) with deep coverage of security, cybersecurity, guardrails, governance, and real-world case studies.">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sdlc: {
+              DEFAULT: '#3b82f6',
+              light: '#60a5fa',
+              dark: '#1d4ed8'
+            },
+            aidlc: {
+              DEFAULT: '#8b5cf6',
+              light: '#a78bfa',
+              dark: '#6d28d9'
+            },
+            compound: {
+              DEFAULT: '#10b981',
+              light: '#34d399',
+              dark: '#059669'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-100 antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Top Enterprise Sticky Header (Two-Tier Structured Architecture) -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800 shadow-xl backdrop-blur-md">
+    <!-- Tier 1: Main Brand & Global Status Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-slate-800/80">
+      <div class="flex items-center justify-between h-14">
+        
+        <!-- Logo & Branding -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('overview')">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/25 ring-1 ring-white/20 shrink-0">
+            <i data-lucide="shield-alert" class="w-5 h-5 text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-base sm:text-lg font-bold tracking-tight text-white">AiDLC <span class="text-slate-400 font-normal">vs</span> SDLC</span>
+              <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Enterprise Portal</span>
+            </div>
+            <p class="text-[11px] text-slate-400 hidden sm:block">Architecture • Security • Governance • Guardrails • Decisioning</p>
+          </div>
+        </div>
+
+        <!-- Global Utilities (API Status + Quick Print + Actions) -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <div id="api-status-pill" class="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-900/90 border border-slate-700/60 text-[11px] text-slate-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-medium">API Ready</span>
+          </div>
+
+          <!-- Spotlight Search Trigger -->
+          <button onclick="openSpotlightSearch()" class="no-print inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700/60 text-xs text-slate-300 hover:text-white transition" title="Quick Search (Ctrl+K)">
+            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span class="hidden sm:inline">Search</span>
+            <kbd class="hidden md:inline px-1 py-0.2 text-[9px] bg-slate-800 rounded border border-slate-700 text-slate-400 font-mono">Ctrl+K</kbd>
+          </button>
+
+          <!-- Download Architecture Pack -->
+          <button onclick="downloadArchitecturePack()" class="no-print inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-indigo-950/60 hover:bg-indigo-900 border border-indigo-500/40 text-xs text-indigo-200 transition" title="Download Executive Architecture Pack (.MD)">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span class="hidden lg:inline">Export Pack</span>
+          </button>
+
+          <button onclick="window.print()" class="no-print inline-flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-slate-700/60 text-xs text-slate-300 hover:text-white transition" title="Print Executive Brief / PDF">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span class="hidden md:inline">Print / PDF</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 2: Dedicated Navigation Scrollbar / Pill Track -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center space-x-1.5 py-2 overflow-x-auto no-scrollbar scroll-smooth" id="nav-tabs">
+        <button onclick="switchTab('overview')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-slate-300 hover:text-white hover:bg-slate-800/70" data-tab="overview">
+          <i data-lucide="layers" class="w-3.5 h-3.5 inline mr-1.5"></i>12 Dimensions
+        </button>
+        <button onclick="switchTab('diagrams')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-emerald-300 hover:text-white hover:bg-emerald-950/50" data-tab="diagrams">
+          <i data-lucide="network" class="w-3.5 h-3.5 inline mr-1.5"></i>Visual Architecture
+        </button>
+        <button onclick="switchTab('phases')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-blue-300 hover:text-white hover:bg-blue-950/50" data-tab="phases">
+          <i data-lucide="git-commit" class="w-3.5 h-3.5 inline mr-1.5"></i>7-Phase Journey
+        </button>
+        <button onclick="switchTab('advantages')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-slate-300 hover:text-white hover:bg-slate-800/70" data-tab="advantages">
+          <i data-lucide="scale" class="w-3.5 h-3.5 inline mr-1.5"></i>Pros & Cons
+        </button>
+        <button onclick="switchTab('matrix')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-slate-300 hover:text-white hover:bg-slate-800/70" data-tab="matrix">
+          <i data-lucide="grid" class="w-3.5 h-3.5 inline mr-1.5"></i>Decision Matrix
+        </button>
+        <button onclick="switchTab('guardrails')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-amber-300 hover:text-white hover:bg-amber-950/50" data-tab="guardrails">
+          <i data-lucide="shield" class="w-3.5 h-3.5 inline mr-1.5"></i>5-Layer Guardrails
+        </button>
+        <button onclick="switchTab('governance')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-sky-300 hover:text-white hover:bg-sky-950/50" data-tab="governance">
+          <i data-lucide="landmark" class="w-3.5 h-3.5 inline mr-1.5"></i>Governance & Standards
+        </button>
+        <button onclick="switchTab('security')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-rose-300 hover:text-white hover:bg-rose-950/50" data-tab="security">
+          <i data-lucide="lock" class="w-3.5 h-3.5 inline mr-1.5"></i>Cybersecurity & OWASP
+        </button>
+        <button onclick="switchTab('casestudies')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-indigo-300 hover:text-white hover:bg-indigo-950/50" data-tab="casestudies">
+          <i data-lucide="book-open" class="w-3.5 h-3.5 inline mr-1.5"></i>12 Case Studies
+        </button>
+        <button onclick="switchTab('hybrid')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-teal-300 hover:text-white hover:bg-teal-950/50" data-tab="hybrid">
+          <i data-lucide="git-merge" class="w-3.5 h-3.5 inline mr-1.5"></i>Compound AI
+        </button>
+        <button onclick="switchTab('finops')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-emerald-300 hover:text-white hover:bg-emerald-950/50" data-tab="finops">
+          <i data-lucide="coins" class="w-3.5 h-3.5 inline mr-1.5"></i>FinOps TCO
+        </button>
+        <button onclick="switchTab('readiness')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-amber-300 hover:text-white hover:bg-amber-950/50" data-tab="readiness">
+          <i data-lucide="clipboard-check" class="w-3.5 h-3.5 inline mr-1.5"></i>CAB Readiness Gate
+        </button>
+        <button onclick="switchTab('toolkit')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-cyan-300 hover:text-white hover:bg-cyan-950/50" data-tab="toolkit">
+          <i data-lucide="code-2" class="w-3.5 h-3.5 inline mr-1.5"></i>Code Toolkit
+        </button>
+        <button onclick="switchTab('calculator')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-purple-300 bg-purple-950/40 border border-purple-500/30 hover:bg-purple-900/50" data-tab="calculator">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 inline mr-1.5"></i>Fit Calculator
+        </button>
+        <button onclick="switchTab('roles')" class="nav-btn whitespace-nowrap px-3 py-1.5 text-xs font-medium rounded-lg transition-all text-slate-300 hover:text-white hover:bg-slate-800/70" data-tab="roles">
+          <i data-lucide="users" class="w-3.5 h-3.5 inline mr-1.5"></i>Engineering Roles
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- SECTION 1: OVERVIEW & PARADIGM SHIFT       -->
+    <!-- ========================================== -->
+    <section id="tab-overview" class="tab-content space-y-10">
+      
+      <!-- Hero Banner -->
+      <div class="relative overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/60 p-8 sm:p-10">
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl space-y-4">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-medium text-purple-300">
+            <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+            <span>The Generative, Agentic & Governance Revolution</span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            AiDLC <span class="text-slate-500">vs</span> SDLC
+          </h1>
+          <p class="text-lg text-slate-300 leading-relaxed">
+            The software industry is experiencing its greatest paradigm shift in 50 years: transitioning from <span class="text-blue-400 font-semibold">deterministic logic crafted line-by-line</span> to <span class="text-purple-400 font-semibold">probabilistic intelligence guided by evaluations, golden datasets, multi-layer guardrails, and neural weights</span>.
+          </p>
+        </div>
+
+        <!-- Paradigm Equation Card -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="glass-card rounded-xl p-5 border-l-4 border-l-blue-500">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold tracking-wider uppercase text-blue-400">Classical SDLC (Deductive Logic)</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Deterministic</span>
+            </div>
+            <div class="bg-slate-950/80 rounded-lg p-3 font-mono text-sm text-blue-200 border border-blue-900/40 mb-3">
+              [Input Data] + [Explicit Code Rules] =&gt; <span class="text-emerald-400 font-bold">100% Deterministic Output</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Software engineers manually conceptualize, write, and verify every branch, state transition, and condition. Flawless for arithmetic, banking transactions, and deterministic workflows.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-xl p-5 border-l-4 border-l-purple-500">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold tracking-wider uppercase text-purple-400">Modern AiDLC (Inductive Reasoning)</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">Probabilistic</span>
+            </div>
+            <div class="bg-slate-950/80 rounded-lg p-3 font-mono text-sm text-purple-200 border border-purple-900/40 mb-3">
+              [Input Data] + [Golden Sets / Evals] =&gt; <span class="text-purple-400 font-bold">Learned Weights / Emergent Agent</span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Engineers curate datasets, craft system prompts, build evaluation harnesses, and govern context. Neural networks synthesize the transformation logic. Natively handles human ambiguity.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Quick Highlights Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-card p-5 rounded-xl border border-slate-800 text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-blue-400">100%</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">SDLC Output Certainty</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Zero variance on identical inputs</div>
+        </div>
+        <div class="glass-card p-5 rounded-xl border border-slate-800 text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-purple-400">High-Dim</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">AiDLC Semantic Depth</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Understands messy PDFs, audio & intent</div>
+        </div>
+        <div class="glass-card p-5 rounded-xl border border-slate-800 text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-400">5 Layers</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">Enterprise Guardrails</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">Input, Retrieval, Model, Output, Ops</div>
+        </div>
+        <div class="glass-card p-5 rounded-xl border border-slate-800 text-center">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">ISO 42001</div>
+          <div class="text-xs font-medium text-slate-400 mt-1">Enterprise Governance</div>
+          <div class="text-[11px] text-slate-500 mt-0.5">NIST AI RMF & EU AI Act aligned</div>
+        </div>
+      </div>
+
+      <!-- 12 Core Paradigm Dimensions Section -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <i data-lucide="layers" class="w-5 h-5 text-purple-400"></i>
+              <span>12 Core Paradigm Dimensions: SDLC vs AiDLC</span>
+            </h2>
+            <p class="text-xs text-slate-400">In-depth architectural comparison from foundational logic and verification to economics and security</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <!-- View Mode Switcher -->
+            <div class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
+              <button id="dim-view-cards-btn" onclick="setDimensionView('cards')" class="px-3 py-1 text-xs rounded-md font-medium bg-slate-800 text-white flex items-center space-x-1">
+                <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+                <span>Deep-Dive Cards</span>
+              </button>
+              <button id="dim-view-table-btn" onclick="setDimensionView('table')" class="px-3 py-1 text-xs rounded-md font-medium text-slate-400 hover:text-white flex items-center space-x-1">
+                <i data-lucide="table" class="w-3.5 h-3.5"></i>
+                <span>Compact Table</span>
+              </button>
+            </div>
+
+            <div class="relative w-full sm:w-56">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-500"></i>
+              <input type="text" id="dimension-search" oninput="filterDimensions()" placeholder="Search 12 dimensions..." class="w-full bg-slate-900 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Cards View Container -->
+        <div id="dimensions-cards-container" class="space-y-6">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+
+        <!-- Table View Container (Hidden by default or toggled) -->
+        <div id="dimensions-table-container" class="hidden overflow-x-auto rounded-xl border border-slate-800 glass-card">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-900/80 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider">
+                <th class="py-3.5 px-4 w-1/4">Dimension</th>
+                <th class="py-3.5 px-4 w-1/3 text-blue-400"><i data-lucide="code" class="w-3.5 h-3.5 inline mr-1"></i>Traditional SDLC</th>
+                <th class="py-3.5 px-4 w-1/3 text-purple-400"><i data-lucide="sparkles" class="w-3.5 h-3.5 inline mr-1"></i>Modern AiDLC</th>
+                <th class="py-3.5 px-4 text-center">Dissection</th>
+              </tr>
+            </thead>
+            <tbody id="dimensions-table-body" class="divide-y divide-slate-800/60">
+              <!-- Rendered dynamically by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION: ARCHITECTURAL DIAGRAMS & FIGURES  -->
+    <!-- ========================================== -->
+    <section id="tab-diagrams" class="tab-content hidden space-y-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+            <i data-lucide="network" class="w-6 h-6 text-emerald-400"></i>
+            <span>Architectural Figures & Visual Blueprint Studio</span>
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Visual diagrams and process flows detailing the operational mechanics of SDLC vs AiDLC, guardrails, and compound systems.
+          </p>
+        </div>
+
+        <!-- Diagram Selector Buttons -->
+        <div class="flex flex-wrap gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800" id="diagram-selector-tabs">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Active Diagram Canvas Container -->
+      <div id="active-diagram-display" class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+        <!-- Injected dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2: 7-PHASE LIFECYCLE DEEP DIVE     -->
+    <!-- ========================================== -->
+    <section id="tab-phases" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="git-branch" class="w-6 h-6 text-indigo-400"></i>
+          <span>7-Phase Comparative Lifecycle Journey</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Explore how each developmental phase transforms when building deterministic code versus probabilistic AI systems, including integrated <strong>Security & Compliance Gates</strong>.
+        </p>
+      </div>
+
+      <!-- Phase Navigator Tabs -->
+      <div class="flex space-x-2 overflow-x-auto pb-2" id="phase-buttons-container">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Phase Detail Card (Active Phase) -->
+      <div id="active-phase-container" class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3: ADVANTAGES & TRADE-OFFS         -->
+    <!-- ========================================== -->
+    <section id="tab-advantages" class="tab-content hidden space-y-10">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="scale" class="w-6 h-6 text-amber-400"></i>
+          <span>Advantages, Disadvantages & Strategic Trade-Offs</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          No architectural paradigm is universally superior. Understanding trade-offs is essential for sound enterprise governance.
+        </p>
+      </div>
+
+      <!-- Dual Side-by-Side Pros/Cons -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- SDLC Column -->
+        <div class="space-y-6">
+          <div class="flex items-center space-x-3 pb-3 border-b border-blue-500/30">
+            <div class="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-lg">
+              <i data-lucide="terminal" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Traditional SDLC</h3>
+              <p class="text-xs text-blue-400">Deterministic, Code-Centric, Explicit Rules</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              <span>Core Advantages</span>
+            </h4>
+            <div id="sdlc-advantages-list" class="space-y-2.5">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center space-x-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>Limitations & Bottlenecks</span>
+            </h4>
+            <div id="sdlc-disadvantages-list" class="space-y-2.5">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- AiDLC Column -->
+        <div class="space-y-6">
+          <div class="flex items-center space-x-3 pb-3 border-b border-purple-500/30">
+            <div class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+              <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Modern AiDLC</h3>
+              <p class="text-xs text-purple-400">Probabilistic, Data-Centric, Continuous Evals</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center space-x-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+              <span>Core Advantages</span>
+            </h4>
+            <div id="aidlc-advantages-list" class="space-y-2.5">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-rose-400 flex items-center space-x-1.5">
+              <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+              <span>Limitations & Risks</span>
+            </h4>
+            <div id="aidlc-disadvantages-list" class="space-y-2.5">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TCO & Cost Modeling Breakdown -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+          <i data-lucide="dollar-sign" class="w-5 h-5 text-emerald-400"></i>
+          <span>Total Cost of Ownership (TCO) & Unit Economics Profile</span>
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800">
+            <div class="text-sm font-bold text-blue-400">1. Runtime Infrastructure</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              <strong class="text-white">SDLC:</strong> Near-zero marginal runtime cost. Standard CPU clusters scale efficiently at fractions of a cent per request.<br><br>
+              <strong class="text-purple-300">AiDLC:</strong> High recurring token taxes ($/million tokens) and expensive GPU VRAM reservation (Nvidia H100s). Semantic caching is required to manage budget.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800">
+            <div class="text-sm font-bold text-purple-400">2. Development & Engineering</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              <strong class="text-white">SDLC:</strong> High initial manual coding hours. Every edge case and regex rule requires human implementation and maintenance.<br><br>
+              <strong class="text-purple-300">AiDLC:</strong> Lightning-fast initial prototyping via prompting. However, specialized AI/EvalOps talent commands higher compensation.
+            </p>
+          </div>
+
+          <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800">
+            <div class="text-sm font-bold text-emerald-400">3. Verification & Maintenance</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              <strong class="text-white">SDLC:</strong> Predictable test execution on CI/CD runners. Regressions are caught instantly by unit test assertions.<br><br>
+              <strong class="text-purple-300">AiDLC:</strong> Continuous data curation flywheel, LLM-as-a-judge benchmarking, and drift monitoring demand dedicated ongoing operational attention.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4: DECISION MATRIX ("WHEN TO USE") -->
+    <!-- ========================================== -->
+    <section id="tab-matrix" class="tab-content hidden space-y-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+            <i data-lucide="compass" class="w-6 h-6 text-emerald-400"></i>
+            <span>Domain Decision Matrix: What to Use & When</span>
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Real-world enterprise guidance mapped directly to statutory compliance frameworks (SOX, HIPAA, DO-178C, EU AI Act).
+          </p>
+        </div>
+
+        <!-- Filter buttons -->
+        <div class="flex space-x-1.5 bg-slate-900 p-1 rounded-lg border border-slate-800">
+          <button onclick="filterMatrix('all')" class="matrix-filter-btn px-3 py-1 text-xs rounded-md font-medium bg-slate-800 text-white" data-filter="all">All</button>
+          <button onclick="filterMatrix('Pure SDLC')" class="matrix-filter-btn px-3 py-1 text-xs rounded-md font-medium text-slate-400 hover:text-white" data-filter="Pure SDLC">Pure SDLC</button>
+          <button onclick="filterMatrix('Pure AiDLC')" class="matrix-filter-btn px-3 py-1 text-xs rounded-md font-medium text-slate-400 hover:text-white" data-filter="Pure AiDLC">Pure AiDLC</button>
+          <button onclick="filterMatrix('Compound AI')" class="matrix-filter-btn px-3 py-1 text-xs rounded-md font-medium text-slate-400 hover:text-white" data-filter="Compound AI">Compound AI</button>
+        </div>
+      </div>
+
+      <!-- Matrix Cards Grid -->
+      <div id="domain-matrix-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5: GUARDRAILS ARCHITECTURE         -->
+    <!-- ========================================== -->
+    <section id="tab-guardrails" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="shield" class="w-6 h-6 text-amber-400"></i>
+          <span>Multi-Layer Enterprise AI Guardrails Taxonomy</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Probabilistic AI cannot be deployed safely without defense-in-depth guardrails. Explore the 5 essential layers protecting enterprise systems from hallucinations, data leaks, and wallet exhaustion.
+        </p>
+      </div>
+
+      <!-- Guardrails 5-Layer Stack -->
+      <div id="guardrails-layers-container" class="space-y-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 6: ENTERPRISE GOVERNANCE           -->
+    <!-- ========================================== -->
+    <section id="tab-governance" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="landmark" class="w-6 h-6 text-sky-400"></i>
+          <span>Enterprise AI Governance, Compliance & Regulatory Standards</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          How enterprise organizations structure AI accountability, manage regulatory compliance, and audit models against global standards.
+        </p>
+      </div>
+
+      <!-- Core Frameworks (ISO 42001, NIST AI RMF, EU AI Act) -->
+      <div id="governance-frameworks-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Enterprise Governance Mechanisms -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+          <i data-lucide="check-square" class="w-5 h-5 text-emerald-400"></i>
+          <span>Mandatory Enterprise Operational Governance Mechanisms</span>
+        </h3>
+        <div id="governance-mechanisms-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 7: CYBERSECURITY & THREAT DEFENSE  -->
+    <!-- ========================================== -->
+    <section id="tab-security" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="lock" class="w-6 h-6 text-rose-400"></i>
+          <span>Cybersecurity & Threat Defense: AppSec vs. AI Security</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Bridging classical application vulnerability defense (OWASP Top 10) with conversational and semantic attack vectors (OWASP Top 10 for LLMs).
+        </p>
+      </div>
+
+      <!-- AppSec vs AI Security Comparison Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <div class="glass-card rounded-xl p-6 border border-blue-500/30 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-blue-500/30">
+            <h3 class="text-base font-bold text-blue-400 flex items-center space-x-2">
+              <i data-lucide="shield-check" class="w-5 h-5"></i>
+              <span>Traditional Application Security (SDLC)</span>
+            </h3>
+            <span class="text-xs px-2 py-0.5 rounded bg-blue-500/10 text-blue-300">Code-Centric</span>
+          </div>
+          <div id="appsec-threats-list" class="space-y-2.5">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="glass-card rounded-xl p-6 border border-rose-500/30 space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-rose-500/30">
+            <h3 class="text-base font-bold text-rose-400 flex items-center space-x-2">
+              <i data-lucide="bug" class="w-5 h-5"></i>
+              <span>AI & LLM Cybersecurity (AiDLC)</span>
+            </h3>
+            <span class="text-xs px-2 py-0.5 rounded bg-rose-500/10 text-rose-300">Semantic & Agentic</span>
+          </div>
+          <div id="aisec-threats-list" class="space-y-2.5">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- OWASP Top 10 for LLMs Interactive Grid -->
+      <div class="space-y-4 pt-4">
+        <h3 class="text-lg font-bold text-white flex items-center space-x-2">
+          <i data-lucide="alert-octagon" class="w-5 h-5 text-rose-400"></i>
+          <span>OWASP Top 10 for Large Language Models & GenAI</span>
+        </h3>
+        <div id="owasp-llm-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+
+      <!-- Threat Defense Lifecycle -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+        <h3 class="text-base font-bold text-white flex items-center space-x-2">
+          <i data-lucide="workflow" class="w-5 h-5 text-purple-400"></i>
+          <span>Enterprise AI Threat Defense Operational Lifecycle</span>
+        </h3>
+        <div id="threat-defense-lifecycle-grid" class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 8: REAL-WORLD CASE STUDIES         -->
+    <!-- ========================================== -->
+    <section id="tab-casestudies" class="tab-content hidden space-y-8">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+            <i data-lucide="book-open" class="w-6 h-6 text-indigo-400"></i>
+            <span>12 Cross-Domain Real-World Case Studies</span>
+          </h2>
+          <p class="text-sm text-slate-400 mt-1">
+            Real-world enterprise dissections across 12 diverse industries showing why teams chose SDLC, AiDLC, or Compound AI.
+          </p>
+        </div>
+
+        <!-- Domain category filter pill list -->
+        <div class="flex flex-wrap gap-1 bg-slate-900 p-1.5 rounded-xl border border-slate-800" id="case-study-filter-container">
+          <button onclick="filterCaseStudies('all')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium bg-slate-800 text-white" data-filter="all">All (12)</button>
+          <button onclick="filterCaseStudies('Fintech')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Fintech">Fintech</button>
+          <button onclick="filterCaseStudies('Healthcare')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Healthcare">Healthcare</button>
+          <button onclick="filterCaseStudies('Aerospace')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Aerospace">Aerospace</button>
+          <button onclick="filterCaseStudies('Automotive')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Automotive">Automotive</button>
+          <button onclick="filterCaseStudies('Telecom')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Telecom">Telecom</button>
+          <button onclick="filterCaseStudies('Insurance')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Insurance">Insurance</button>
+          <button onclick="filterCaseStudies('Logistics')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Logistics">Logistics</button>
+          <button onclick="filterCaseStudies('Energy')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Energy">Energy</button>
+          <button onclick="filterCaseStudies('Legal')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Legal">Legal</button>
+          <button onclick="filterCaseStudies('Human Resources')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Human Resources">HR</button>
+          <button onclick="filterCaseStudies('Public Sector')" class="cs-filter-btn px-2.5 py-1 text-xs rounded-lg font-medium text-slate-400 hover:text-white" data-filter="Public Sector">Gov</button>
+        </div>
+      </div>
+
+      <div id="case-studies-container" class="space-y-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 9: COMPOUND AI & HYBRID PATTERNS   -->
+    <!-- ========================================== -->
+    <section id="tab-hybrid" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="combine" class="w-6 h-6 text-emerald-400"></i>
+          <span>Compound AI Systems: The Enterprise Convergence</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Modern enterprise software does not choose between SDLC and AiDLC—it fuses them into hybrid architectures that deliver both cognitive reasoning and deterministic safety.
+        </p>
+      </div>
+
+      <!-- Visual Blueprint: The Deterministic Sandwich Pattern -->
+      <div class="glass-card rounded-2xl p-6 sm:p-8 border border-emerald-500/30 space-y-6">
+        
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wide">Primary Enterprise Pattern</span>
+            <h3 class="text-xl font-bold text-white mt-1">The Deterministic Sandwich Pattern</h3>
+          </div>
+          <div class="text-xs text-slate-400 font-mono">Input Guardrail -&gt; AI Core -&gt; Output Guardrail</div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-4xl">
+          Probabilistic AI models should never directly write to customer accounts, execute bank transfers, or commit unverified database transactions. The <strong>Deterministic Sandwich Pattern</strong> wraps the stochastic LLM between two deterministic SDLC validation layers.
+        </p>
+
+        <!-- Visual Architecture Flow Diagram -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+          
+          <!-- Layer 1 -->
+          <div class="bg-blue-950/40 border border-blue-500/40 rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-400 uppercase tracking-wider">Layer 1 (SDLC)</span>
+              <i data-lucide="shield-check" class="w-5 h-5 text-blue-400"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">Pre-Flight Deterministic Gate</h4>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Authentication & RBAC verification</li>
+              <li>Input schema validation (Zod / JSON Schema)</li>
+              <li>PII / Sensitive data redaction</li>
+              <li>Rate limiting & prompt injection scan</li>
+            </ul>
+            <div class="pt-2 text-[11px] text-blue-300 font-mono">Result: Sanitized, Trusted Request</div>
+          </div>
+
+          <!-- Layer 2 -->
+          <div class="bg-purple-950/40 border border-purple-500/40 rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">Layer 2 (AiDLC)</span>
+              <i data-lucide="brain" class="w-5 h-5 text-purple-400"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">Cognitive Reasoning Core</h4>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Vector RAG contextual search</li>
+              <li>LLM reasoning & semantic synthesis</li>
+              <li>Structured tool / function calling</li>
+              <li>Low-temperature constrained inference</li>
+            </ul>
+            <div class="pt-2 text-[11px] text-purple-300 font-mono">Result: Candidate Structured JSON Payload</div>
+          </div>
+
+          <!-- Layer 3 -->
+          <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Layer 3 (SDLC)</span>
+              <i data-lucide="check-check" class="w-5 h-5 text-emerald-400"></i>
+            </div>
+            <h4 class="text-sm font-bold text-white">Post-Flight Assertion Gate</h4>
+            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
+              <li>Strict JSON schema compliance check</li>
+              <li>Business logic boundary assertions</li>
+              <li>Transactional ACID commit or rollback</li>
+              <li>Compliance audit logging & telemetry</li>
+            </ul>
+            <div class="pt-2 text-[11px] text-emerald-300 font-mono">Result: Safe, Auditable System State</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Other Hybrid Patterns Grid -->
+      <div id="hybrid-patterns-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 10: FIT ASSESSMENT CALCULATOR      -->
+    <!-- ========================================== -->
+    <section id="tab-calculator" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="sparkles" class="w-6 h-6 text-purple-400"></i>
+          <span>Interactive Fit Assessment & Decision Engine</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          Answer 5 strategic criteria to generate an algorithmic recommendation, architectural blueprint, and guardrail checklist.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Assessment Form (7 Cols) -->
+        <div class="lg:col-span-7 glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 space-y-6">
+          <form id="assessment-form" onsubmit="handleAssessmentSubmit(event)" class="space-y-5">
+            
+            <!-- Question 1 -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                1. Nature of the Core Problem Domain
+              </label>
+              <select id="param-problemNature" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:border-purple-500">
+                <option value="deterministic_rules">Deterministic & Rule-Based (Mathematical formulas, ledgers, state machines)</option>
+                <option value="pattern_recognition">Pattern Recognition & Anomaly Detection (Fraud detection, telemetry trends)</option>
+                <option value="natural_language_ambiguity">Unstructured Language & High Ambiguity (Chat, document parsing, creative synthesis)</option>
+                <option value="hybrid_workflow" selected>Hybrid Workflow (Structured ERP/DB + Unstructured document/query intelligence)</option>
+              </select>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                2. Explainability & Regulatory Auditability Need
+              </label>
+              <select id="param-explainabilityNeed" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:border-purple-500">
+                <option value="strict_mathematical">Strict Mathematical Auditability (DO-178C avionics, medical dosing, tax ledgers)</option>
+                <option value="probabilistic_acceptable" selected>Probabilistic Acceptable with Source Grounding & Citations</option>
+                <option value="blackbox_acceptable">Black-Box Acceptable (Empirical performance/conversion matters most)</option>
+              </select>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                3. Training Data & Evaluation Asset Maturity
+              </label>
+              <select id="param-dataMaturity" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:border-purple-500">
+                <option value="no_data_specs_only">No Datasets Available (Specifications and logic rules only)</option>
+                <option value="some_unstructured" selected>Moderate Unstructured Data (Company docs, FAQs, unstructured logs)</option>
+                <option value="large_high_quality_dataset">High-Maturity Golden Dataset (Annotated historical data & golden eval sets)</option>
+              </select>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                4. System Error Tolerance & Safety Guardrail Strictness
+              </label>
+              <select id="param-errorTolerance" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:border-purple-500">
+                <option value="zero_tolerance_strict">Zero Tolerance (Any hallucination causes catastrophic financial/life loss)</option>
+                <option value="low_guardrails_required" selected>Low Tolerance (Acceptable only when bounded by deterministic schema checks)</option>
+                <option value="high_generative_assistive">High Tolerance / Assistive (Drafting assistant, creative suggestions)</option>
+              </select>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="space-y-1.5">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+                5. Infrastructure Compute Budget & Latency Sensitivity
+              </label>
+              <select id="param-budgetScale" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:outline-none focus:border-purple-500">
+                <option value="low_cpu_only">Low Compute Budget / Sub-5ms Latency Required (CPU microservices only)</option>
+                <option value="moderate_cloud_api" selected>Moderate Budget / 500ms-2s Latency Acceptable (Cloud Serverless LLM APIs)</option>
+                <option value="enterprise_h100_cluster">Enterprise Dedicated GPU Infrastructure (Private cluster / fine-tuning)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:opacity-95 transition flex items-center justify-center space-x-2">
+              <i data-lucide="calculator" class="w-4 h-4"></i>
+              <span>Run Algorithmic Assessment</span>
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Assessment Results Display (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div id="assessment-result-card" class="glass-card rounded-2xl p-6 border border-slate-800 space-y-5">
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Decision Engine Verdict</span>
+              <span id="verdict-confidence" class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-semibold">95% Match</span>
+            </div>
+
+            <div>
+              <div id="verdict-title" class="text-2xl font-extrabold text-emerald-400">
+                Compound AI (Hybrid SDLC + AiDLC)
+              </div>
+              <p id="verdict-pattern" class="text-xs font-mono text-slate-400 mt-1">
+                Pattern: The Deterministic Sandwich Pattern & Dual-Loop Agile
+              </p>
+            </div>
+
+            <p id="verdict-recommendation" class="text-xs text-slate-300 leading-relaxed">
+              Your project requires the intelligence of modern AI bounded by the reliability and safety of deterministic software. Implement the Deterministic Sandwich pattern: use SDLC for input sanitization and output schema validation, while allowing AiDLC to power the cognitive reasoning core.
+            </p>
+
+            <!-- Radar / Metric Chart -->
+            <div class="pt-2">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Trade-off Radar Profile</div>
+              <div class="w-full h-48 flex items-center justify-center">
+                <canvas id="assessmentChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Guardrails -->
+            <div class="space-y-2 pt-2 border-t border-slate-800">
+              <div class="text-xs font-bold text-slate-300 uppercase tracking-wider">Recommended Guardrails</div>
+              <ul id="verdict-guardrails" class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+                <!-- Injected dynamically -->
+              </ul>
+            </div>
+
+            <!-- Toolchain -->
+            <div class="space-y-2 pt-2 border-t border-slate-800">
+              <div class="text-xs font-bold text-slate-300 uppercase tracking-wider">Suggested Toolchain</div>
+              <div id="verdict-tools" class="flex flex-wrap gap-1.5">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 11: ROLE EVOLUTION MATRIX          -->
+    <!-- ========================================== -->
+    <section id="tab-roles" class="tab-content hidden space-y-8">
+      
+      <div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2">
+          <i data-lucide="users" class="w-6 h-6 text-purple-400"></i>
+          <span>Engineering Team & Career Role Evolution</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1">
+          How engineering disciplines, responsibilities, and skill requirements are shifting from traditional SDLC to AiDLC and AI Cybersecurity.
+        </p>
+      </div>
+
+      <div id="roles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 12: ENTERPRISE FINOPS TCO SIMULATOR -->
+    <!-- ========================================== -->
+    <section id="tab-finops" class="tab-content hidden space-y-8">
+      <div>
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-300">
+          <i data-lucide="trending-down" class="w-3.5 h-3.5"></i>
+          <span>Unit Economics & Architectural ROI</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2 mt-2">
+          <i data-lucide="coins" class="w-6 h-6 text-emerald-400"></i>
+          <span>Enterprise FinOps TCO & Latency Simulator</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1 max-w-4xl">
+          Simulate real-time operational costs, latency penalties, and token unit economics across Pure SDLC (microservices), Pure AiDLC (direct frontier LLM API calls), Compound AI (Semantic Caching + SLM Triage), and Self-Hosted Private GPU Clusters.
+        </p>
+      </div>
+
+      <!-- Simulator Control Panel & Results Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Controls Column (Left) -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-6">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-base font-bold text-white flex items-center space-x-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-emerald-400"></i>
+              <span>Traffic & Token Sliders</span>
+            </h3>
+            <button onclick="resetFinOpsDefaults()" class="text-[11px] text-slate-400 hover:text-emerald-400 transition">Reset Defaults</button>
+          </div>
+
+          <!-- Slider 1: Daily Queries -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label class="text-slate-300 font-medium">Daily Query Volume:</label>
+              <span id="slider-queries-val" class="font-mono text-emerald-400 font-bold">50,000 req/day</span>
+            </div>
+            <input type="range" id="slider-queries" min="1000" max="500000" step="1000" value="50000" oninput="onFinOpsInputChange()" class="w-full accent-emerald-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+              <span>1k</span>
+              <span>100k</span>
+              <span>250k</span>
+              <span>500k</span>
+            </div>
+          </div>
+
+          <!-- Slider 2: Prompt Tokens -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label class="text-slate-300 font-medium">Avg Prompt Length (Input):</label>
+              <span id="slider-prompt-val" class="font-mono text-emerald-400 font-bold">800 tokens</span>
+            </div>
+            <input type="range" id="slider-prompt" min="100" max="4000" step="50" value="800" oninput="onFinOpsInputChange()" class="w-full accent-emerald-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+              <span>100</span>
+              <span>1k</span>
+              <span>2.5k</span>
+              <span>4k</span>
+            </div>
+          </div>
+
+          <!-- Slider 3: Completion Tokens -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label class="text-slate-300 font-medium">Avg Completion Length (Output):</label>
+              <span id="slider-completion-val" class="font-mono text-emerald-400 font-bold">300 tokens</span>
+            </div>
+            <input type="range" id="slider-completion" min="50" max="2000" step="25" value="300" oninput="onFinOpsInputChange()" class="w-full accent-emerald-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+              <span>50</span>
+              <span>500</span>
+              <span>1k</span>
+              <span>2k</span>
+            </div>
+          </div>
+
+          <!-- Slider 4: Semantic Cache Hit Rate -->
+          <div class="space-y-2">
+            <div class="flex justify-between items-center text-xs">
+              <label class="text-slate-300 font-medium">Semantic Cache Hit Rate:</label>
+              <span id="slider-cache-val" class="font-mono text-teal-400 font-bold">35%</span>
+            </div>
+            <input type="range" id="slider-cache" min="0" max="80" step="5" value="35" oninput="onFinOpsInputChange()" class="w-full accent-teal-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500 font-mono">
+              <span>0% (Cold)</span>
+              <span>25%</span>
+              <span>50%</span>
+              <span>80%</span>
+            </div>
+          </div>
+
+          <!-- Model Tier Select -->
+          <div class="space-y-2">
+            <label class="text-xs text-slate-300 font-medium">Frontier Model Tier:</label>
+            <select id="finops-model-tier" onchange="onFinOpsInputChange()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-emerald-500">
+              <option value="flagship">Flagship Frontier (GPT-4o / Claude 3.5 Sonnet - $3/$15 per 1M)</option>
+              <option value="balanced">Balanced Efficiency (GPT-4o-mini / Haiku - $0.15/$0.60 per 1M)</option>
+              <option value="opensource">Open-Weights Amortized (Llama 3.3 70B - $0.60/$1.80 per 1M)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 4-Pillar Comparison Cards (Right 2 Cols) -->
+        <div class="lg:col-span-2 space-y-6">
+          
+          <!-- Recommendation Banner -->
+          <div id="finops-recommendation-box" class="p-4 rounded-xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-indigo-950/60 border border-emerald-500/30 flex items-start space-x-3 text-xs leading-relaxed text-slate-200">
+            <i data-lucide="lightbulb" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div id="finops-recommendation-text">Calculating optimal architectural TCO...</div>
+          </div>
+
+          <!-- 4 Pillars Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="finops-cards-grid">
+            <!-- Dynamically populated by app.js -->
+          </div>
+
+          <!-- Comprehensive Comparison Table -->
+          <div class="glass-card rounded-2xl p-6 border border-slate-800 overflow-x-auto">
+            <h4 class="text-sm font-bold text-white mb-4 flex items-center space-x-2">
+              <i data-lucide="table" class="w-4 h-4 text-slate-400"></i>
+              <span>Full Lifecycle Unit Economics Breakdown</span>
+            </h4>
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="py-2.5 px-3">Architecture Paradigm</th>
+                  <th class="py-2.5 px-3">Monthly Cost</th>
+                  <th class="py-2.5 px-3">Annual Cost</th>
+                  <th class="py-2.5 px-3">Cost / 1k Queries</th>
+                  <th class="py-2.5 px-3">P95 Latency</th>
+                  <th class="py-2.5 px-3">Carbon (CO2e/yr)</th>
+                </tr>
+              </thead>
+              <tbody id="finops-table-body" class="divide-y divide-slate-800/60 font-mono">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 13: CAB PRODUCTION READINESS GATE  -->
+    <!-- ========================================== -->
+    <section id="tab-readiness" class="tab-content hidden space-y-8">
+      <div>
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-medium text-amber-300">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span>Change Advisory Board (CAB) & ISO 42001 Compliance</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2 mt-2">
+          <i data-lucide="clipboard-check" class="w-6 h-6 text-amber-400"></i>
+          <span>Production Go/No-Go Readiness Audit Gate</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1 max-w-4xl">
+          15 enterprise compliance criteria across 5 governance categories. Check off completed architectural gates to calculate your project's CAB readiness score and export an official sign-off certificate.
+        </p>
+      </div>
+
+      <!-- Scoreboard Top Bar -->
+      <div class="glass-card rounded-2xl p-6 border border-slate-800 grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+        <div>
+          <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">CAB Readiness Score</span>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span id="readiness-score-display" class="text-4xl font-black text-amber-400 font-mono">0%</span>
+            <span class="text-xs text-slate-500">/ 100%</span>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Deployment Status</span>
+          <div class="mt-1">
+            <span id="readiness-status-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-rose-500/20 text-rose-300 border border-rose-500/40">
+              DEPLOYMENT REJECTED
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Critical Gates Passed</span>
+          <div class="flex items-baseline space-x-2 mt-1">
+            <span id="readiness-critical-count" class="text-2xl font-bold text-white font-mono">0</span>
+            <span class="text-xs text-slate-400">/ 11 Critical</span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2">
+          <button onclick="selectAllReadinessCriteria()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition">
+            Select All
+          </button>
+          <button onclick="exportCabCertificate()" class="px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-xs font-semibold text-white shadow-lg shadow-amber-600/30 transition flex items-center justify-center space-x-1.5">
+            <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
+            <span>Export Certificate</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Categories & Checkboxes Accordion -->
+      <div id="readiness-categories-container" class="space-y-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 14: PRODUCTION CODE STARTER TOOLKIT -->
+    <!-- ========================================== -->
+    <section id="tab-toolkit" class="tab-content hidden space-y-8">
+      <div>
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-medium text-cyan-300">
+          <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+          <span>Production Boilerplates & Declarative Schemas</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white flex items-center space-x-2 mt-2">
+          <i data-lucide="code-2" class="w-6 h-6 text-cyan-400"></i>
+          <span>Production Code Starter Toolkit & Cheat Sheets</span>
+        </h2>
+        <p class="text-sm text-slate-400 mt-1 max-w-4xl">
+          Vetted, production-ready code implementations for the Deterministic Sandwich Pattern, CI/CD Evaluation Gates with automated pull request blocking, and declarative Guardrails JSON configurations.
+        </p>
+      </div>
+
+      <!-- Tab Buttons for Snippets -->
+      <div class="flex flex-wrap gap-2 pb-2" id="toolkit-snippet-tabs">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Active Snippet Code Block with Copy Button -->
+      <div class="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
+        <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+            <span id="active-snippet-title" class="text-xs font-bold text-slate-300 ml-2">Snippet Title</span>
+            <span id="active-snippet-lang" class="px-2 py-0.5 text-[10px] font-mono rounded bg-slate-800 text-slate-400 border border-slate-700">typescript</span>
+          </div>
+          <button onclick="copyActiveSnippet()" id="btn-copy-snippet" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 hover:text-white transition flex items-center space-x-1.5 border border-slate-700">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span id="btn-copy-snippet-text">Copy Code</span>
+          </button>
+        </div>
+        <div class="p-4 bg-slate-950 overflow-x-auto max-h-[600px]">
+          <pre><code id="active-snippet-code" class="text-xs font-mono text-cyan-300 leading-relaxed"></code></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Enterprise Footer -->
+  <footer class="glass-panel border-t border-slate-800 py-8 mt-12 text-center text-xs text-slate-500 space-y-2">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+        <span class="text-slate-300 font-semibold">AiDLC vs SDLC Enterprise Portal</span>
+        <span class="text-slate-600">|</span>
+        <span>Version 1.1.0</span>
+      </div>
+      <div>
+        Enterprise SAFe, ISO 42001, NIST AI RMF & Zero-Hardcoding Verified
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dimension Deep-Dive Modal -->
+  <div id="dimension-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-card bg-slate-900/95 max-w-4xl w-full rounded-2xl border border-slate-700 max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold text-sm">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modal-dim-title" class="text-xl font-bold text-white">Dimension Name</h3>
+            <p id="modal-dim-tagline" class="text-xs text-purple-400 font-mono mt-0.5">Tagline</p>
+          </div>
+        </div>
+        <button onclick="closeDimensionModal()" class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      
+      <div id="modal-dim-content" class="p-6 overflow-y-auto space-y-6 text-xs text-slate-300">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Spotlight Quick Search Modal (Ctrl+K) -->
+  <div id="spotlight-modal" class="fixed inset-0 z-50 hidden flex items-start justify-center p-4 pt-16 sm:pt-24 bg-black/80 backdrop-blur-sm" onclick="closeSpotlightSearch(event)">
+    <div class="glass-card bg-slate-900 max-w-2xl w-full rounded-2xl border border-slate-700 overflow-hidden shadow-2xl flex flex-col max-h-[80vh]" onclick="event.stopPropagation()">
+      
+      <!-- Search Input Header -->
+      <div class="p-4 border-b border-slate-800 flex items-center space-x-3 bg-slate-900/90">
+        <i data-lucide="search" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+        <input type="text" id="spotlight-input" placeholder="Search across dimensions, blueprints, guardrails, governance, case studies, code..." class="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none" oninput="runSpotlightSearch()" autofocus>
+        <button onclick="closeSpotlightSearch()" class="px-1.5 py-0.5 text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded border border-slate-700 font-mono">ESC</button>
+      </div>
+
+      <!-- Instant Results List -->
+      <div id="spotlight-results" class="p-4 overflow-y-auto space-y-2 text-xs divide-y divide-slate-800/40">
+        <div class="text-center py-8 text-slate-500">Type a keyword like <span class="text-emerald-400 font-mono">"sandwich"</span>, <span class="text-emerald-400 font-mono">"ISO 42001"</span>, <span class="text-emerald-400 font-mono">"FinTech"</span>, <span class="text-emerald-400 font-mono">"FinOps"</span>...</div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+        <span>Press <kbd class="px-1 py-0.5 bg-slate-800 rounded font-mono text-slate-300">Esc</kbd> to exit</span>
+        <span>AiDLC vs SDLC Knowledge Graph</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CAB Sign-Off Certificate Modal -->
+  <div id="cab-certificate-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="glass-card bg-slate-900 max-w-3xl w-full rounded-2xl border border-slate-700 max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-6 border-b border-slate-800 flex items-center justify-between bg-slate-900/95">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white">Enterprise CAB Quality & Governance Audit Certificate</h3>
+            <p class="text-xs text-amber-400 font-mono">ISO 42001 / NIST AI RMF / SAFe Governance Gate</p>
+          </div>
+        </div>
+        <button onclick="closeCabModal()" class="p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="cab-certificate-content" class="p-6 overflow-y-auto space-y-4 text-xs font-mono text-slate-200 bg-slate-950">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="p-4 bg-slate-900 border-t border-slate-800 flex justify-end space-x-3">
+        <button onclick="copyCabCertificateText()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition flex items-center space-x-1.5">
+          <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          <span id="btn-copy-cert-text">Copy Markdown</span>
+        </button>
+        <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-xs font-semibold text-white transition flex items-center space-x-1.5">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print Certificate</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

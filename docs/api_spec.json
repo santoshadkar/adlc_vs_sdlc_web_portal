@@ -1,0 +1,155 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AiDLC vs SDLC Knowledge & Decision Matrix API",
+    "version": "1.2.0",
+    "description": "API contracts for exploring AiDLC vs SDLC lifecycle comparisons, 12 in-depth paradigm dimensions, 12 cross-domain case studies, interactive architectural visual diagrams, 5-layer guardrails, enterprise governance frameworks (NIST, ISO 42001, EU AI Act), and AI cybersecurity threat vectors (OWASP LLM Top 10)."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "paths": {
+    "/overview": {
+      "get": {
+        "summary": "Get paradigm overview and 12 core comparative dimensions with full deep dives",
+        "responses": {
+          "200": { "description": "Overview and dimensional breakdown" }
+        }
+      }
+    },
+    "/phases": {
+      "get": {
+        "summary": "Retrieve 7-phase detailed comparison between SDLC and AiDLC including security gates",
+        "responses": {
+          "200": { "description": "Phase-by-phase breakdown" }
+        }
+      }
+    },
+    "/advantages": {
+      "get": {
+        "summary": "Retrieve pros, cons, and TCO trade-offs of SDLC and AiDLC",
+        "responses": {
+          "200": { "description": "Comprehensive advantage and trade-off data" }
+        }
+      }
+    },
+    "/matrix": {
+      "get": {
+        "summary": "Retrieve domain use cases and decision recommendation matrix with compliance frameworks",
+        "responses": {
+          "200": { "description": "Domain-specific guidance matrix" }
+        }
+      }
+    },
+    "/hybrid-patterns": {
+      "get": {
+        "summary": "Retrieve Compound AI architectural patterns (Deterministic Sandwich, Dual-Loop Agile)",
+        "responses": {
+          "200": { "description": "Hybrid compound patterns" }
+        }
+      }
+    },
+    "/roles": {
+      "get": {
+        "summary": "Retrieve career role evolution from SDLC to AiDLC",
+        "responses": {
+          "200": { "description": "Role transformation mapping" }
+        }
+      }
+    },
+    "/guardrails": {
+      "get": {
+        "summary": "Retrieve 5-layer enterprise AI guardrails taxonomy (Input, Retrieval, Model, Output, Operational)",
+        "responses": {
+          "200": { "description": "Guardrails architecture data" }
+        }
+      }
+    },
+    "/governance": {
+      "get": {
+        "summary": "Retrieve enterprise AI governance frameworks (ISO 42001, NIST AI RMF, EU AI Act)",
+        "responses": {
+          "200": { "description": "Enterprise governance framework specifications" }
+        }
+      }
+    },
+    "/security": {
+      "get": {
+        "summary": "Retrieve cybersecurity comparison (AppSec vs LLM Security) and OWASP LLM Top 10 defenses",
+        "responses": {
+          "200": { "description": "Cybersecurity threat matrices and defense lifecycles" }
+        }
+      }
+    },
+    "/case-studies": {
+      "get": {
+        "summary": "Retrieve 12 real-world enterprise case studies across all major industry domains",
+        "responses": {
+          "200": { "description": "Detailed real-world case studies across 12 verticals" }
+        }
+      }
+    },
+    "/diagrams": {
+      "get": {
+        "summary": "Retrieve visual architectural diagram metadata and visual flow models",
+        "responses": {
+          "200": { "description": "Visual diagram library for architecture, security, and process models" }
+        }
+      }
+    },
+    "/assess": {
+      "post": {
+        "summary": "Evaluate project criteria and return recommendation (SDLC, AiDLC, or Hybrid)",
+        "responses": {
+          "200": { "description": "Assessment verdict and architectural roadmap" },
+          "400": { "description": "Invalid input parameters" }
+        }
+      }
+    },
+    "/finops": {
+      "post": {
+        "summary": "Simulate and compare FinOps TCO, annual operational costs, and latency across SDLC, AiDLC, and Compound AI",
+        "responses": {
+          "200": { "description": "FinOps metrics, comparative cost models, and architectural guidance" },
+          "400": { "description": "Invalid FinOps simulation parameters" }
+        }
+      }
+    },
+    "/toolkit": {
+      "get": {
+        "summary": "Retrieve production-ready code boilerplates and configuration cheat sheets",
+        "responses": {
+          "200": { "description": "Code templates including TypeScript/Python Sandwich Wrappers and CI/CD Eval Gates" }
+        }
+      }
+    },
+    "/readiness-checklist": {
+      "get": {
+        "summary": "Retrieve 15 enterprise Go/No-Go readiness audit criteria across 5 categories",
+        "responses": {
+          "200": { "description": "CAB audit criteria and evaluation categories" }
+        }
+      }
+    },
+    "/readiness-audit": {
+      "post": {
+        "summary": "Evaluate submitted checklist and compute official CAB readiness score and certification status",
+        "responses": {
+          "200": { "description": "CAB readiness score, status, and critical failure breakdown" },
+          "400": { "description": "Invalid checklist submission" }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "System Health Status",
+        "responses": {
+          "200": { "description": "Service is operational" }
+        }
+      }
+    }
+  }
+}
